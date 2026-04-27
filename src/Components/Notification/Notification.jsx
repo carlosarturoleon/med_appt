@@ -11,30 +11,37 @@ const Notification = ({ children }) => {
   const [appointmentData, setAppointmentData] = useState(null);
   const [showNotification, setShowNotification] = useState(true);
 
-  // useEffect hook to perform side effects in the component
-  useEffect(() => {
-    // Retrieve stored username, doctor data, and appointment data from sessionStorage and localStorage
+  const loadFromStorage = () => {
     const storedUsername = sessionStorage.getItem('email');
     const storedDoctorData = JSON.parse(localStorage.getItem('doctorData'));
     const storedAppointmentData = JSON.parse(localStorage.getItem(storedDoctorData?.name));
 
-    // Set isLoggedIn state to true and update username if storedUsername exists
     if (storedUsername) {
       setIsLoggedIn(true);
       setUsername(storedUsername);
     }
-
-    // Set doctorData state if storedDoctorData exists
     if (storedDoctorData) {
       setDoctorData(storedDoctorData);
     }
-
-    // Set appointmentData state if storedAppointmentData exists
     if (storedAppointmentData) {
       setAppointmentData(storedAppointmentData);
       setShowNotification(true);
+    } else {
+      setAppointmentData(null);
     }
-  }, []); // Empty dependency array ensures useEffect runs only once after initial render
+  };
+
+  // useEffect hook to perform side effects in the component
+  useEffect(() => {
+    loadFromStorage();
+    // Listen for storage changes (cross-tab and same-tab via custom event)
+    window.addEventListener('storage', loadFromStorage);
+    window.addEventListener('appointmentUpdated', loadFromStorage);
+    return () => {
+      window.removeEventListener('storage', loadFromStorage);
+      window.removeEventListener('appointmentUpdated', loadFromStorage);
+    };
+  }, []);
 
   // Handler to dismiss notification when appointment is cancelled
   const handleCancel = () => {

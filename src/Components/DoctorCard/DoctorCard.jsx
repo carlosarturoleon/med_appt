@@ -13,11 +13,20 @@ const DoctorCard = ({ name, speciality, experience, ratings }) => {
       id: uuidv4(),
       ...appointmentData,
     };
-    setAppointments([...appointments, newAppointment]);
+    const updated = [...appointments, newAppointment];
+    setAppointments(updated);
+    // Save to localStorage so Notification component can read it
+    localStorage.setItem('doctorData', JSON.stringify({ name, speciality }));
+    localStorage.setItem(name, JSON.stringify(newAppointment));
+    window.dispatchEvent(new Event('appointmentUpdated'));
   };
 
   const handleCancel = (appointmentId) => {
     setAppointments(appointments.filter((a) => a.id !== appointmentId));
+    // Clear from localStorage
+    localStorage.removeItem('doctorData');
+    localStorage.removeItem(name);
+    window.dispatchEvent(new Event('appointmentUpdated'));
   };
 
   return (
