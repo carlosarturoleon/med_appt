@@ -11,6 +11,8 @@ const ProfileCard = () => {
   const [userDetails, setUserDetails] = useState({});
   const [updatedDetails, setUpdatedDetails] = useState({});
   const [editMode, setEditMode] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
   // Access the navigation functionality from React Router
   const navigate = useNavigate();
@@ -50,6 +52,9 @@ const ProfileCard = () => {
       }
     } catch (error) {
       console.error(error);
+      setError("Could not load profile. Please try again later.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -108,6 +113,9 @@ const ProfileCard = () => {
   };
 
   // Render the profile form with different sections based on edit mode
+  if (loading) return <div className="profile-container"><p>Loading profile...</p></div>;
+  if (error) return <div className="profile-container"><p style={{ color: 'red' }}>{error}</p></div>;
+
   return (
     <div className="profile-container">
       {editMode ? (

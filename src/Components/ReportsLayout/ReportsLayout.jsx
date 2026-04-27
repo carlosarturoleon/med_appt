@@ -16,6 +16,9 @@ const ReportsLayout = () => {
         <div className="reports-container">
             <h1>Your Reports</h1>
             <p className="reports-subtitle">Consultation history for <strong>{name}</strong></p>
+            {reports.length === 0 ? (
+                <p className="reports-empty">No reports found.</p>
+            ) : null}
             <table className="reports-table">
                 <thead>
                     <tr>
