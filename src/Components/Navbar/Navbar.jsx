@@ -71,6 +71,7 @@ function Navbar() {
               </span>
               <ul className="dropdown-menu">
                 <li><Link to="/profile">My Profile</Link></li>
+                <li><Link to="/reports">Your Reports</Link></li>
                 <li><Link to="/review">My Reviews</Link></li>
               </ul>
             </li>
