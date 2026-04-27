@@ -48,20 +48,21 @@ const ReviewForm = ({ doctorName, speciality }) => {
   return (
     <div className="review-form-container">
       <div className="review-info">
-        <h3>Consultation with {doctorName}</h3>
-        <p>Speciality: {speciality}</p>
+        <div className="review-info-text">
+          <h3>Consultation with {doctorName}</h3>
+          <p>Speciality: {speciality}</p>
+        </div>
+        {/* Display button to open the form, disabled after submission */}
+        {!showForm && (
+          <button
+            className="review-btn"
+            onClick={handleButtonClick}
+            disabled={!!submittedMessage}
+          >
+            Give Feedback
+          </button>
+        )}
       </div>
-
-      {/* Display button to open the form, disabled after submission */}
-      {!showForm && (
-        <button
-          className="review-btn"
-          onClick={handleButtonClick}
-          disabled={!!submittedMessage}
-        >
-          Give Feedback
-        </button>
-      )}
 
       {/* Display form for giving feedback */}
       {showForm && (
