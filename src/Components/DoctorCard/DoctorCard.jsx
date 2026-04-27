@@ -83,7 +83,7 @@ const DoctorCard = ({ name, speciality, experience, ratings }) => {
                   <AppointmentForm
                     doctorName={name}
                     doctorSpeciality={speciality}
-                    onSubmit={(data) => { handleFormSubmit(data); close(); }}
+                    onSubmit={(data) => { handleFormSubmit(data); setTimeout(close, 0); }}
                   />
                 )}
               </div>
