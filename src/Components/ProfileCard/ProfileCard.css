@@ -1,128 +1,74 @@
+/* Following code has been commented with appropriate comments for your reference.
+*/
+/* Styles for the container holding the profile information */
 .profile-container {
-    max-width: 480px;
-    margin: 60px auto;
-    padding: 36px;
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    max-width: 400px; /* Set the maximum width of the container to 400 pixels */
+    margin: 15% auto; /* Center the container horizontally with a 15% top margin */
+    padding: 20px; /* Add 20 pixels of padding inside the container */
+    background-color: #f5f5f5; /* Set the background color of the container to light gray */
+    border-radius: 4px; /* Apply a border radius of 4 pixels to round the corners */
 }
 
-.profile-avatar {
-    width: 96px;
-    height: 96px;
-    border-radius: 50%;
-    background-color: #f0f7ff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 20px auto;
+/* Styles for the heading within the profile container */
+.profile-container h1 {
+    margin-top: 0; /* Remove any top margin from the heading */
 }
 
-/* View mode */
-.profile-details h1 {
-    font-size: 22px;
-    font-weight: 700;
-    color: #0d213f;
-    margin-bottom: 12px;
+/* Styles for the form within the profile container */
+.profile-container form {
+    margin-bottom: 20px; /* Add a bottom margin of 20 pixels to the form */
 }
 
+/* Styles for labels within the profile container */
+.profile-container label {
+    display: block; /* Display labels as block elements to stack them vertically */
+    margin-bottom: 10px; /* Add a bottom margin of 10 pixels to separate labels */
+}
+
+/* Styles for text and email input fields within the profile container */
+.profile-container input[type="text"],
+.profile-container input[type="email"] {
+    width: 100%; /* Set the width of text and email inputs to 100% of the container */
+    padding: 8px; /* Add 8 pixels of padding inside the input fields */
+    border: 1px solid #ccc; /* Apply a 1 pixel solid border with light gray color */
+    border-radius: 4px; /* Round the corners of the input fields with a border radius of 4 pixels */
+}
+
+/* Styles for buttons within the profile container */
+.profile-container button {
+    display: block; /* Display buttons as block elements to make them full width */
+    width: 100%; /* Set the width of buttons to 100% of the container */
+    padding: 8px; /* Add 8 pixels of padding inside the buttons */
+    background-color: #2190ff; /* Set the background color of buttons to a blue shade */
+    color: #fff; /* Set the text color of buttons to white */
+    border: none; /* Remove borders from buttons */
+    border-radius: 4px; /* Apply a border radius of 4 pixels to round button corners */
+    cursor: pointer; /* Change cursor to pointer when hovering over buttons */
+}
+
+/* Styles for the container holding additional profile details */
+.profile-details {
+    background-color: #fff; /* Set the background color of details container to white */
+    border-radius: 4px; /* Apply a border radius of 4 pixels to round the corners */
+    padding: 20px; /* Add 20 pixels of padding inside the details container */
+}
+
+/* Styles for headings within the profile details container */
+.profile-details h2 {
+    margin-top: 0; /* Remove any top margin from headings inside details container */
+}
+
+/* Styles for paragraphs within the profile details container */
 .profile-details p {
-    font-size: 15px;
-    color: #555;
-    margin: 8px 0;
+    margin-bottom: 10px; /* Add a bottom margin of 10 pixels to separate paragraphs */
 }
 
-/* Edit mode form */
-.profile-form h2 {
-    font-size: 20px;
-    font-weight: 700;
-    color: #0d213f;
-    margin-bottom: 20px;
-}
-
-.profile-form label {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    font-size: 13px;
-    font-weight: 600;
-    color: #444;
-    text-transform: uppercase;
-    letter-spacing: 0.4px;
-    margin-bottom: 14px;
-    gap: 6px;
-}
-
-.profile-form input {
-    padding: 10px 12px;
-    border: 1.5px solid #dde3ec;
-    border-radius: 6px;
-    font-size: 14px;
-    color: #333;
-    background-color: #fafbfd;
-    transition: border-color 0.2s ease;
-}
-
-.profile-form input:focus {
-    outline: none;
-    border-color: #2190ff;
-    box-shadow: 0 0 0 3px rgba(33, 144, 255, 0.12);
-    background-color: #fff;
-}
-
-.profile-form input:disabled {
-    background-color: #f0f0f0;
-    color: #999;
-    cursor: not-allowed;
-}
-
-.profile-form__actions {
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-/* Buttons */
-.profile-btn {
-    padding: 10px 24px;
-    border: none;
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.1s ease;
-}
-
-.profile-btn:hover {
-    transform: translateY(-1px);
-}
-
-.profile-btn--edit {
-    background-color: #2190ff;
-    color: #fff;
-    margin-top: 20px;
-}
-
-.profile-btn--edit:hover {
-    background-color: #1a7ae0;
-}
-
-.profile-btn--save {
-    background-color: #28a745;
-    color: #fff;
-}
-
-.profile-btn--save:hover {
-    background-color: #218838;
-}
-
-.profile-btn--cancel {
-    background-color: #f0f0f0;
-    color: #333;
-}
-
-.profile-btn--cancel:hover {
-    background-color: #e0e0e0;
+/* Styles for buttons within the profile details container */
+.profile-details button {
+    background-color: #2190ff; /* Set the background color of buttons to a blue shade */
+    color: #fff; /* Set the text color of buttons to white */
+    border: none; /* Remove borders from buttons */
+    border-radius: 4px; /* Apply a border radius of 4 pixels to round button corners */
+    padding: 8px 12px; /* Add padding inside buttons (8 pixels top/bottom, 12 pixels left/right) */
+    cursor: pointer; /* Change cursor to pointer when hovering over buttons in details container */
 }

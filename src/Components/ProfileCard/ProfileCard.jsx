@@ -110,16 +110,10 @@ const ProfileCard = () => {
   // Render the profile form with different sections based on edit mode
   return (
     <div className="profile-container">
-      <div className="profile-avatar">
-        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="#2190ff" viewBox="0 0 16 16">
-          <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-        </svg>
-      </div>
-
       {editMode ? (
         // Edit mode: show editable form
-        <form className="profile-form" onSubmit={handleSubmit}>
-          <h2>Edit Profile</h2>
+        <form onSubmit={handleSubmit}>
+          <h1>Edit Profile</h1>
           <label>
             Email
             <input
@@ -147,10 +141,7 @@ const ProfileCard = () => {
               onChange={handleInputChange}
             />
           </label>
-          <div className="profile-form__actions">
-            <button type="submit" className="profile-btn profile-btn--save">Save</button>
-            <button type="button" className="profile-btn profile-btn--cancel" onClick={() => setEditMode(false)}>Cancel</button>
-          </div>
+          <button type="submit">Save</button>
         </form>
       ) : (
         // View mode: show profile details
@@ -158,7 +149,7 @@ const ProfileCard = () => {
           <h1>Welcome, {userDetails.name}</h1>
           <p><b>Email:</b> {userDetails.email}</p>
           <p><b>Phone:</b> {userDetails.phone}</p>
-          <button className="profile-btn profile-btn--edit" onClick={handleEdit}>Edit</button>
+          <button onClick={handleEdit}>Edit</button>
         </div>
       )}
     </div>
