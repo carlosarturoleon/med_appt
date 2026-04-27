@@ -1,139 +1,98 @@
+// Following code has been commented with appropriate comments for your reference.
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import './Sign_Up.css';
+import './Sign_Up.css'
+import { Link, useNavigate } from 'react-router-dom';
+import { API_URL } from '../../../config';
 
+// Function component for Sign Up form
 const Sign_Up = () => {
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [errors, setErrors] = useState({});
+    // State variables using useState hook
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [password, setPassword] = useState('');
+    const [showerr, setShowerr] = useState(''); // State to show error messages
+    const navigate = useNavigate(); // Navigation hook from react-router
 
-  const validate = () => {
-    const newErrors = {};
+    // Function to handle form submission
+    const register = async (e) => {
+        e.preventDefault(); // Prevent default form submission
 
-    if (!name.trim()) {
-      newErrors.name = 'Name is required.';
-    }
+        // API Call to register user
+        const response = await fetch(`${API_URL}/api/auth/register`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                name: name,
+                email: email,
+                password: password,
+                phone: phone,
+            }),
+        });
 
-    if (!phone.trim()) {
-      newErrors.phone = 'Phone number is required.';
-    } else if (!/^\d{10}$/.test(phone.trim())) {
-      newErrors.phone = 'Phone number must be exactly 10 digits.';
-    }
+        const json = await response.json(); // Parse the response JSON
 
-    if (!email.trim()) {
-      newErrors.email = 'Email is required.';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
-      newErrors.email = 'Enter a valid email address.';
-    }
+        if (json.authtoken) {
+            // Store user data in session storage
+            sessionStorage.setItem("auth-token", json.authtoken);
+            sessionStorage.setItem("name", name);
+            sessionStorage.setItem("phone", phone);
+            sessionStorage.setItem("email", email);
 
-    if (!password) {
-      newErrors.password = 'Password is required.';
-    } else if (password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters.';
-    }
+            // Redirect user to home page
+            navigate("/");
+            window.location.reload(); // Refresh the page
+        } else {
+            if (json.errors) {
+                for (const error of json.errors) {
+                    setShowerr(error.msg); // Show error messages
+                }
+            } else {
+                setShowerr(json.error);
+            }
+        }
+    };
 
-    return newErrors;
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const validationErrors = validate();
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-    } else {
-      setErrors({});
-      alert('Sign Up successful!');
-    }
-  };
-
-  const handleReset = () => {
-    setName('');
-    setPhone('');
-    setEmail('');
-    setPassword('');
-    setErrors({});
-  };
-
-  return (
-    <div className="container" style={{ marginTop: '5%' }}>
-      <div className="signup-grid">
-        <div className="signup-text">
-          <h1>Sign Up</h1>
+    // JSX to render the Sign Up form
+    return (
+        <div className="container" style={{marginTop:'5%'}}>
+            <div className="signup-grid">
+                <div className="signup-text">
+                    <h1>Sign Up</h1>
+                </div>
+                <div className="signup-text1" style={{textAlign: 'left'}}>
+                    Already a member? <span><Link to="/login" style={{color: '#2190FF'}}>Login</Link></span>
+                </div>
+                <div className="signup-form">
+                    <form method="POST" onSubmit={register}>
+                        <div className="form-group">
+                            <label htmlFor="email">Email</label>
+                            <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" name="email" id="email" className="form-control" placeholder="Enter your email" aria-describedby="helpId" />
+                            {showerr && <div className="err" style={{ color: 'red' }}>{showerr}</div>}
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="name">Name</label>
+                            <input value={name} type="text" onChange={(e) => setName(e.target.value)} name="name" id="name" className="form-control" placeholder="Enter your name" aria-describedby="helpId" />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="phone">Phone</label>
+                            <input value={phone} onChange={(e) => setPhone(e.target.value)} type="tel" name="phone" id="phone" className="form-control" placeholder="Enter your phone number" aria-describedby="helpId" />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="password">Password</label>
+                            <input value={password} onChange={(e) => setPassword(e.target.value)} name="password" id="password" className="form-control" placeholder="Enter your password" aria-describedby="helpId" />
+                        </div>
+                        <div className="btn-group">
+                            <button type="submit" className="btn btn-primary mb-2 mr-1 waves-effect waves-light">Submit</button>
+                            <button type="reset" className="btn btn-danger mb-2 waves-effect waves-light">Reset</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div className="signup-text1" style={{ textAlign: 'left' }}>
-          Already a member? <span><Link to="/login" style={{ color: '#2190FF' }}>Login</Link></span>
-        </div>
-        <div className="signup-form">
-          <form onSubmit={handleSubmit}>
+    );
+}
 
-            <div className="form-group">
-              <label htmlFor="name">Name</label>
-              <input
-                type="text"
-                name="name"
-                id="name"
-                className="form-control"
-                placeholder="Enter your name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-              {errors.name && <span style={{ color: 'red', fontSize: '14px' }}>{errors.name}</span>}
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="phone">Phone</label>
-              <input
-                type="tel"
-                name="phone"
-                id="phone"
-                className="form-control"
-                placeholder="Enter your 10-digit phone number"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-              />
-              {errors.phone && <span style={{ color: 'red', fontSize: '14px' }}>{errors.phone}</span>}
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                className="form-control"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              {errors.email && <span style={{ color: 'red', fontSize: '14px' }}>{errors.email}</span>}
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                className="form-control"
-                placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              {errors.password && <span style={{ color: 'red', fontSize: '14px' }}>{errors.password}</span>}
-            </div>
-
-            <div className="btn-group">
-              <button type="submit" className="btn btn-primary mb-2 mr-1 waves-effect waves-light">Submit</button>
-              <button type="button" className="btn btn-danger mb-2 waves-effect waves-light" onClick={handleReset}>Reset</button>
-            </div>
-
-          </form>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default Sign_Up;
+export default Sign_Up; // Export the Sign_Up component for use in other components

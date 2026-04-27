@@ -1,8 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
 function Navbar() {
+  const navigate = useNavigate();
+
+  // Get user name from session storage
+  const email = sessionStorage.getItem("email");
+  const userName = email ? email.split("@")[0] : null;
+
   const handleClick = () => {
     const navLinks = document.querySelector(".nav__links");
     const navIcon = document.querySelector(".nav__icon i");
@@ -16,6 +22,15 @@ function Navbar() {
       navIcon.classList.remove("fa-times");
       navIcon.classList.add("fa-bars");
     }
+  };
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("auth-token");
+    sessionStorage.removeItem("name");
+    sessionStorage.removeItem("phone");
+    sessionStorage.removeItem("email");
+    navigate("/");
+    window.location.reload();
   };
 
   return (
@@ -48,16 +63,29 @@ function Navbar() {
         <li className="link">
           <a href="#">Appointments</a>
         </li>
-        <li className="link">
-          <Link to="/signup">
-            <button className="btn1">Sign Up</button>
-          </Link>
-        </li>
-        <li className="link">
-          <Link to="/login">
-            <button className="btn1">Login</button>
-          </Link>
-        </li>
+        {userName ? (
+          <>
+            <li className="link">
+              <span style={{ color: '#3685fb', fontWeight: '600' }}>{userName}</span>
+            </li>
+            <li className="link">
+              <button className="btn1" onClick={handleLogout}>Logout</button>
+            </li>
+          </>
+        ) : (
+          <>
+            <li className="link">
+              <Link to="/signup">
+                <button className="btn1">Sign Up</button>
+              </Link>
+            </li>
+            <li className="link">
+              <Link to="/login">
+                <button className="btn1">Login</button>
+              </Link>
+            </li>
+          </>
+        )}
       </ul>
     </nav>
   );
