@@ -61,7 +61,7 @@ function Navbar() {
           <Link to="/">Home</Link>
         </li>
         <li className="link">
-          <a href="#">Appointments</a>
+          <Link to="/booking-consultation">Appointments</Link>
         </li>
         {userName ? (
           <>
