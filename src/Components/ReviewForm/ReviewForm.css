@@ -1,0 +1,96 @@
+.review-form-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.review-info {
+    margin-bottom: 16px;
+}
+
+.review-info h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #2190ff;
+    margin-bottom: 6px;
+}
+
+.review-info p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.review-success {
+    color: green;
+    font-weight: bold;
+}
+
+.review-btn {
+    background-color: #2190ff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.review-btn:hover {
+    background-color: #1a7ae0;
+}
+
+.review-form {
+    margin-top: 16px;
+    border-top: 1px solid #e0e0e0;
+    padding-top: 16px;
+}
+
+.review-form h4 {
+    font-size: 16px;
+    margin-bottom: 14px;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.review-submit-btn {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.review-submit-btn:hover {
+    background-color: #218838;
+}
