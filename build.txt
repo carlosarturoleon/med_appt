@@ -1,0 +1,24 @@
+=== server/ ===
+total 424
+-rw-r--r--    1 carlosleon  staff     651 Aug 17  2023 package.json
+drwxr-xr-x    3 carlosleon  staff      96 Aug 23  2023 models
+drwxr-xr-x    3 carlosleon  staff      96 Aug 23  2023 routes
+drwxr-xr-x    4 carlosleon  staff     128 Aug 23  2023 public
+drwxr-xr-x  155 carlosleon  staff    4960 Apr 26 20:24 node_modules
+-rw-r--r--    1 carlosleon  staff     787 Apr 26 20:33 db.js
+-rw-r--r--    1 carlosleon  staff     719 Apr 26 22:59 index.js
+drwxr-xr-x    7 carlosleon  staff     224 Apr 26 23:00 build
+-rw-r--r--    1 carlosleon  staff  204275 Apr 26 23:00 package-lock.json
+
+=== server/build/ ===
+total 56
+-rw-r--r--  1 carlosleon  staff  9522 Apr 26 23:00 favicon.svg
+-rw-r--r--  1 carlosleon  staff  5031 Apr 26 23:00 icons.svg
+-rw-r--r--  1 carlosleon  staff   915 Apr 26 23:00 patient_report.pdf
+drwxr-xr-x  4 carlosleon  staff   128 Apr 26 23:00 assets
+-rw-r--r--  1 carlosleon  staff   848 Apr 26 23:00 index.html
+
+=== server/build/assets/ ===
+total 576
+-rw-r--r--  1 carlosleon  staff  272195 Apr 26 23:00 index-BwdixQjM.js
+-rw-r--r--  1 carlosleon  staff   19460 Apr 26 23:00 index-BYYq_w78.css
