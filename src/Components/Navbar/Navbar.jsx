@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
+import ProfileCard from '../ProfileCard/ProfileCard';
 
 function Navbar() {
   const navigate = useNavigate();
@@ -65,8 +66,16 @@ function Navbar() {
         </li>
         {userName ? (
           <>
-            <li className="link">
-              <span style={{ color: '#3685fb', fontWeight: '600' }}>{userName}</span>
+            <li className="link welcome-user">
+              <span style={{ color: '#3685fb', fontWeight: '600', cursor: 'pointer' }}>
+                {userName} ▾
+              </span>
+              <ul className="dropdown-menu">
+                <li><ProfileCard /></li>
+                <li style={{ padding: '4px 16px', borderTop: '1px solid #eee' }}>
+                  <Link to="/review">My Reviews</Link>
+                </li>
+              </ul>
             </li>
             <li className="link">
               <button className="btn1" onClick={handleLogout}>Logout</button>
