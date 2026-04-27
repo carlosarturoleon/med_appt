@@ -1,9 +1,11 @@
 // Following code has been commented with appropriate comments for your reference.
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './ReviewForm.css';
 
 // Function component for giving reviews
 const ReviewForm = ({ doctorName, speciality }) => {
+  const navigate = useNavigate();
   // State variables using useState hook
   const [showForm, setShowForm] = useState(false);
   const [submittedMessage, setSubmittedMessage] = useState('');
@@ -16,6 +18,10 @@ const ReviewForm = ({ doctorName, speciality }) => {
 
   // Function to handle button click event
   const handleButtonClick = () => {
+    if (!sessionStorage.getItem('email')) {
+      navigate('/login');
+      return;
+    }
     setShowForm(true);
   };
 
