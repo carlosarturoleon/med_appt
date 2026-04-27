@@ -27,16 +27,17 @@ const ReviewForm = ({ doctorName, speciality }) => {
 
   // Function to handle form input changes
   const handleChange = (e) => {
-    // Update the form data based on user input
+    // Update the form data based on user input and clear warning
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setShowWarning(false);
   };
 
   // Function to handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Check if all required fields are filled before submission
-    if (formData.name && formData.review && formData.rating > 0) {
-      setSubmittedMessage(formData);
+    // Trim to catch whitespace-only input, check rating > 0
+    if (formData.name.trim() && formData.review.trim() && formData.rating > 0) {
+      setSubmittedMessage({ ...formData, name: formData.name.trim(), review: formData.review.trim() });
       setShowWarning(false);
       setShowForm(false);
       setFormData({ name: '', review: '', rating: 0 });
