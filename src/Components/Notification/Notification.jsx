@@ -57,8 +57,8 @@ const Notification = ({ children }) => {
     <div>
       {/* Render children components */}
       {children}
-      {/* Display appointment notification if user is logged in, appointmentData is available, and showNotification is true */}
-      {isLoggedIn && appointmentData && showNotification && (
+      {/* Display appointment notification if appointmentData is available and showNotification is true */}
+      {appointmentData && showNotification && (
         <div className="appointment-card">
           <div className="appointment-card__content">
             {/* Display title for appointment details */}
