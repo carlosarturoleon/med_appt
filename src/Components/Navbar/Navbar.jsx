@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
-import ProfileCard from '../ProfileCard/ProfileCard';
 
 function Navbar() {
   const navigate = useNavigate();
@@ -71,10 +70,8 @@ function Navbar() {
                 {userName} ▾
               </span>
               <ul className="dropdown-menu">
-                <li><ProfileCard /></li>
-                <li style={{ padding: '4px 16px', borderTop: '1px solid #eee' }}>
-                  <Link to="/review">My Reviews</Link>
-                </li>
+                <li><Link to="/profile">My Profile</Link></li>
+                <li><Link to="/review">My Reviews</Link></li>
               </ul>
             </li>
             <li className="link">
