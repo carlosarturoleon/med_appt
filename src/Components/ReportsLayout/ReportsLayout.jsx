@@ -12,21 +12,6 @@ const ReportsLayout = () => {
         { id: 3, doctor: 'Dr. Mark Davis', speciality: 'Dentist' },
     ];
 
-    const handleView = (report) => {
-        alert(`Viewing report for consultation with ${report.doctor} (${report.speciality})`);
-    };
-
-    const handleDownload = (report) => {
-        const content = `Consultation Report\n\nDoctor: ${report.doctor}\nSpeciality: ${report.speciality}\nPatient: ${name}`;
-        const blob = new Blob([content], { type: 'text/plain' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `report_${report.id}.txt`;
-        a.click();
-        URL.revokeObjectURL(url);
-    };
-
     return (
         <div className="reports-container">
             <h1>Your Reports</h1>
@@ -47,8 +32,23 @@ const ReportsLayout = () => {
                             <td>{report.doctor}</td>
                             <td>{report.speciality}</td>
                             <td>
-                                <button className="report-btn report-btn--view" onClick={() => handleView(report)}>View</button>
-                                <button className="report-btn report-btn--download" onClick={() => handleDownload(report)}>Download</button>
+                                {/* View: opens the PDF in a new tab */}
+                                <a
+                                    href="/patient_report.pdf"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="report-btn report-btn--view"
+                                >
+                                    View
+                                </a>
+                                {/* Download: uses download attribute on anchor tag */}
+                                <a
+                                    href="/patient_report.pdf"
+                                    download="patient_report.pdf"
+                                    className="report-btn report-btn--download"
+                                >
+                                    Download
+                                </a>
                             </td>
                         </tr>
                     ))}
